@@ -1,0 +1,224 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>بنّ ومزاج | Coffee House</title>
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700;800;900&display=swap');
+:root{
+  --bg:#120d0a;--panel:#211713;--panel2:#2b1d16;--cream:#f8ead5;
+  --muted:#c5ad96;--gold:#d9a15b;--gold2:#f2c98b;--line:rgba(255,232,204,.12);
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{margin:0;background:var(--bg);color:var(--cream);font-family:'Cairo',Tahoma,sans-serif;overflow-x:hidden}
+a{color:inherit;text-decoration:none}
+button,input,textarea{font:inherit}
+button{cursor:pointer}
+.container{width:min(1160px,92%);margin:auto}
+header{position:sticky;top:0;z-index:20;background:rgba(18,13,10,.86);backdrop-filter:blur(14px);border-bottom:1px solid var(--line)}
+.nav{display:flex;align-items:center;justify-content:space-between;gap:20px;padding:15px 0}
+.logo{font-weight:900;font-size:1.35rem;color:var(--gold2);display:flex;align-items:center;gap:8px}
+.logo span{display:inline-grid;place-items:center;width:42px;height:42px;border-radius:14px;background:linear-gradient(135deg,#8b4b25,#d9a15b);color:#160d08}
+.navlinks{display:flex;gap:22px;color:#e5d1ba;font-size:.94rem}
+.navlinks a:hover{color:var(--gold2)}
+.cart-btn,.primary{border:0;border-radius:999px;padding:11px 20px;background:linear-gradient(135deg,var(--gold),var(--gold2));color:#24140b;font-weight:900;box-shadow:0 8px 25px #d9a15b22}
+.cart-btn b{background:#26150b;color:#fff;border-radius:50%;padding:2px 7px;margin-right:5px}
+.hero{min-height:610px;display:grid;grid-template-columns:1.05fr .95fr;align-items:center;gap:30px;position:relative;padding:55px 0 70px;overflow:hidden}
+.hero:before{content:"";position:absolute;width:520px;height:520px;border-radius:50%;background:#9b55251c;filter:blur(12px);left:-100px;top:20px}
+.eyebrow{color:var(--gold);font-weight:800;letter-spacing:1px}
+h1{font-size:clamp(2.5rem,5vw,5rem);line-height:1.22;margin:14px 0}
+h1 em{font-style:normal;color:var(--gold2)}
+.hero p{color:var(--muted);font-size:1.1rem;line-height:2;max-width:550px}
+.hero-actions{display:flex;gap:12px;flex-wrap:wrap;margin-top:25px}
+.secondary{border:1px solid #d9a15b66;border-radius:999px;padding:10px 20px;color:var(--gold2);background:transparent}
+.hero-art{height:430px;display:grid;place-items:center;position:relative}
+.glow{position:absolute;width:330px;height:330px;border-radius:50%;background:radial-gradient(circle,#d99a4b38,transparent 68%);animation:pulse 4s ease-in-out infinite}
+.bigcup{font-size:clamp(9rem,20vw,15rem);filter:drop-shadow(0 25px 25px #0009);animation:rise 1.35s cubic-bezier(.2,.8,.2,1) both, float 4s ease-in-out 1.35s infinite;position:relative;z-index:2}
+.steam{position:absolute;top:35px;right:47%;font-size:4rem;color:#ffe8ce77;animation:steam 2.5s ease-in-out infinite}
+.bean{position:absolute;font-size:2rem;animation:orbit 8s linear infinite}
+.bean.one{top:60px;left:20%}.bean.two{bottom:55px;right:15%;animation-delay:-3s}.bean.three{top:45%;right:8%;animation-delay:-5s}
+.hero-tag{position:absolute;bottom:35px;left:10%;background:#2a1b13;border:1px solid var(--line);padding:12px 18px;border-radius:18px;box-shadow:0 12px 30px #0005;animation:rise 1s .3s both}
+.hero-tag strong{color:var(--gold2);font-size:1.2rem}
+section{padding:65px 0}
+.section-head{text-align:center;margin-bottom:32px}
+.section-head h2{font-size:2.2rem;margin:5px 0 8px}
+.section-head p{color:var(--muted);margin:0}
+.categories{display:flex;justify-content:center;gap:10px;flex-wrap:wrap;margin:25px 0 35px}
+.cat-btn{border:1px solid var(--line);background:#211713;color:var(--cream);border-radius:999px;padding:9px 18px;transition:.25s}
+.cat-btn.active,.cat-btn:hover{background:var(--gold);color:#21130a;border-color:var(--gold)}
+.menu-section{margin:50px 0}
+.menu-title{display:flex;align-items:center;gap:12px;margin-bottom:18px}
+.menu-title .icon{font-size:1.8rem}
+.menu-title h3{font-size:1.55rem;margin:0}
+.menu-title small{color:var(--muted);margin-right:auto}
+.products{display:grid;grid-template-columns:repeat(5,1fr);gap:16px}
+.product{background:linear-gradient(145deg,#2b1d16,#1d140f);border:1px solid var(--line);border-radius:20px;overflow:hidden;transition:transform .25s,border-color .25s;position:relative}
+.product:hover{transform:translateY(-7px);border-color:#d9a15b88}
+.product-art{height:145px;display:grid;place-items:center;font-size:4rem;background:radial-gradient(circle at 50% 70%,#a45c2b55,transparent 65%),linear-gradient(135deg,#39251a,#20150f)}
+.product-info{padding:14px}
+.product-info h4{margin:0 0 5px;font-size:1rem}
+.product-info p{color:var(--muted);font-size:.78rem;line-height:1.7;margin:0 0 12px;min-height:42px}
+.product-bottom{display:flex;align-items:center;justify-content:space-between;gap:8px}
+.price{font-weight:900;color:var(--gold2)}
+.add{width:35px;height:35px;border:0;border-radius:12px;background:var(--gold);color:#1b1009;font-size:1.35rem;font-weight:900}
+.badge{position:absolute;top:10px;right:10px;background:#f2c98b;color:#28170b;font-size:.68rem;padding:4px 9px;border-radius:99px;font-weight:800}
+.about{background:linear-gradient(135deg,#261810,#17100c);border-block:1px solid var(--line)}
+.about-grid{display:grid;grid-template-columns:1fr 1fr;gap:35px;align-items:center}
+.about-card{border:1px solid var(--line);border-radius:24px;padding:28px;background:#ffffff05}
+.about-card h2{font-size:2rem;margin:0 0 12px}
+.about-card p{color:var(--muted);line-height:2}
+.features{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin-top:20px}
+.feature{padding:15px;border-radius:16px;background:#ffffff08;text-align:center}
+.feature strong{display:block;color:var(--gold2);font-size:1.2rem}
+footer{padding:35px 0;text-align:center;color:var(--muted);border-top:1px solid var(--line)}
+.cart-panel{position:fixed;z-index:50;left:20px;bottom:20px;width:min(390px,calc(100% - 40px));background:#241811;border:1px solid #d9a15b66;border-radius:22px;padding:18px;box-shadow:0 20px 60px #0009;transform:translateY(calc(100% + 40px));transition:.35s}
+.cart-panel.open{transform:translateY(0)}
+.cart-head{display:flex;justify-content:space-between;align-items:center;margin-bottom:12px}
+.cart-head h3{margin:0}
+.close-cart{background:transparent;color:var(--cream);border:0;font-size:1.5rem}
+.cart-items{max-height:220px;overflow:auto}
+.cart-row{display:flex;justify-content:space-between;gap:10px;padding:10px 0;border-bottom:1px solid var(--line);font-size:.9rem}
+.cart-row button{border:0;background:#ffffff10;color:var(--cream);border-radius:7px;padding:2px 8px}
+.cart-total{display:flex;justify-content:space-between;margin:15px 0;font-weight:900}
+.cart-form{display:grid;gap:9px}
+.cart-form input,.cart-form textarea{width:100%;background:#160f0b;border:1px solid var(--line);border-radius:12px;padding:10px;color:#fff;outline:none}
+.cart-form input:focus,.cart-form textarea:focus{border-color:var(--gold)}
+.whatsapp{width:100%;border:0;border-radius:12px;background:#25d366;color:#082b15;font-weight:900;padding:12px}
+.toast{position:fixed;bottom:25px;right:25px;background:#f2c98b;color:#21130a;padding:12px 18px;border-radius:12px;font-weight:800;z-index:70;opacity:0;transform:translateY(20px);transition:.25s;pointer-events:none}
+.toast.show{opacity:1;transform:translateY(0)}
+@keyframes rise{from{opacity:0;transform:translateY(120px) scale(.82)}to{opacity:1;transform:translateY(0) scale(1)}}
+@keyframes float{0%,100%{transform:translateY(0)}50%{transform:translateY(-15px)}}
+@keyframes pulse{0%,100%{transform:scale(.95);opacity:.7}50%{transform:scale(1.08);opacity:1}}
+@keyframes steam{0%{opacity:0;transform:translateY(30px) scale(.8)}50%{opacity:.8}100%{opacity:0;transform:translateY(-35px) scale(1.2)}}
+@keyframes orbit{0%,100%{transform:translateY(0) rotate(0)}50%{transform:translateY(-22px) rotate(18deg)}}
+@media(max-width:1000px){.products{grid-template-columns:repeat(3,1fr)}.hero{min-height:500px}.navlinks{gap:12px}}
+@media(max-width:700px){.navlinks{display:none}.hero{grid-template-columns:1fr;text-align:center;padding-top:45px}.hero p{margin:auto}.hero-art{height:300px;order:-1}.bigcup{font-size:10rem}.hero-tag{left:4%;bottom:10px}.products{grid-template-columns:repeat(2,1fr);gap:10px}.product-art{height:120px}.about-grid{grid-template-columns:1fr}.features{grid-template-columns:1fr}.section-head h2{font-size:1.8rem}}
+@media(max-width:380px){.products{grid-template-columns:1fr}.product{display:grid;grid-template-columns:100px 1fr}.product-art{height:100%;font-size:2.7rem}.product-info p{min-height:0}}
+</style>
+</head>
+<body>
+<header>
+  <div class="container nav">
+    <a class="logo" href="#home"><span>☕</span> بنّ ومزاج</a>
+    <nav class="navlinks"><a href="#home">الرئيسية</a><a href="#menu">المنيو</a><a href="#about">عنّا</a><a href="#contact">اطلب الآن</a></nav>
+    <button class="cart-btn" onclick="toggleCart()">🛒 السلة <b id="cartCount">0</b></button>
+  </div>
+</header>
+
+<main>
+<section class="container hero" id="home">
+  <div>
+    <div class="eyebrow">☕ قهوتك… على مزاجك</div>
+    <h1>ابدأ يومك<br><em>برشفة سعادة</em></h1>
+    <p>من أول ريحة البن لآخر رشفة، حضّرنا لك مشروبات بحب ومذاق يظبط يومك. اختار من المنيو واطلب بسهولة.</p>
+    <div class="hero-actions"><a class="primary" href="#menu">استكشف المنيو ←</a><button class="secondary" onclick="toggleCart()">افتح سلة الطلبات</button></div>
+  </div>
+  <div class="hero-art">
+    <div class="glow"></div><div class="steam">〰</div><div class="bean one">🫘</div><div class="bean two">☕</div><div class="bean three">🫘</div>
+    <div class="bigcup">☕</div><div class="hero-tag">تحضير طازة كل يوم<br><strong>مزاجك يستاهل</strong></div>
+  </div>
+</section>
+
+<section id="menu">
+  <div class="container">
+    <div class="section-head"><div class="eyebrow">اختار مشروبك المفضل</div><h2>المنيو بتاعنا</h2><p>كل اللي بتحبه… في مكان واحد</p></div>
+    <div class="categories">
+      <button class="cat-btn active" onclick="showCategory('all',this)">كل المنيو</button>
+      <button class="cat-btn" onclick="showCategory('hot',this)">☕ قهوة ساخنة</button>
+      <button class="cat-btn" onclick="showCategory('cold',this)">🧊 قهوة باردة</button>
+      <button class="cat-btn" onclick="showCategory('juice',this)">🍓 عصائر فريش</button>
+      <button class="cat-btn" onclick="showCategory('soft',this)">🥤 مشروبات غازية</button>
+    </div>
+    <div id="menuSections"></div>
+  </div>
+</section>
+
+<section class="about" id="about">
+  <div class="container about-grid">
+    <div class="about-card"><div class="eyebrow">حكايتنا مع القهوة</div><h2>القهوة مش مجرد مشروب…<br><em style="color:var(--gold2)">دي لحظة راحة</em></h2><p>في بنّ ومزاج بنهتم بكل تفصيلة: اختيار البن، جودة المكونات، وطريقة التحضير. هدفنا إن كل كوب يوصلك بمذاق حلو وتجربة تستاهل تتكرر.</p><a class="primary" href="#menu">جرّب مشروبك المفضل</a></div>
+    <div><div class="features"><div class="feature">🌱<strong>مكونات طازة</strong><small>جودة في كل كوب</small></div><div class="feature">❤️<strong>تحضير بحب</strong><small>اهتمام بكل تفصيلة</small></div><div class="feature">⚡<strong>طلب سهل</strong><small>اطلب من واتساب</small></div></div></div>
+  </div>
+</section>
+<section id="contact"><div class="container section-head"><div class="eyebrow">جاهز تطلب؟</div><h2>خلّي مزاجك أحلى ☕</h2><p>اختار طلبك من المنيو واضغط إتمام الطلب من السلة.</p><button class="primary" onclick="toggleCart()">ابدأ طلبك الآن</button></div></section>
+</main>
+
+<footer><div class="container">© <span id="year"></span> بنّ ومزاج — معمول بحب لكل عشاق القهوة ☕</div></footer>
+
+<div class="cart-panel" id="cartPanel">
+  <div class="cart-head"><h3>🛒 سلة الطلبات</h3><button class="close-cart" onclick="toggleCart()">×</button></div>
+  <div class="cart-items" id="cartItems"><p style="color:var(--muted)">السلة لسه فاضية، اختار مشروب من المنيو.</p></div>
+  <div class="cart-total"><span>الإجمالي</span><span id="total">0 جنيه</span></div>
+  <form class="cart-form" id="orderForm">
+    <input id="customerName" placeholder="اسمك" required>
+    <input id="customerPhone" placeholder="رقم موبايلك" required>
+    <textarea id="customerAddress" rows="2" placeholder="العنوان / تفاصيل التوصيل" required></textarea>
+    <textarea id="customerNotes" rows="2" placeholder="ملاحظات على الطلب (اختياري)"></textarea>
+    <button class="whatsapp" type="submit">إتمام الطلب على واتساب</button>
+  </form>
+</div>
+<div class="toast" id="toast">اتضاف للسلة ☕</div>
+
+<script>
+/* غيّر الرقم ده لرقم واتساب الكافيه بصيغة مصر الدولية: 20 ثم رقمك بدون الصفر الأول */
+const WHATSAPP_NUMBER = "201552502547";
+
+const groups = [
+ {key:"hot",title:"القهوة الساخنة",icon:"☕",desc:"دفا ومذاق أصيل",items:[
+  ["إسبريسو","☕",45,"جرعة قهوة مركزة"],["أمريكانو","☕",50,"قهوة غنية وخفيفة"],["كابتشينو","🥛",60,"إسبريسو مع رغوة الحليب"],["لاتيه","☕",65,"قهوة بالحليب الكريمي"],["موكا","🍫",70,"قهوة بالشوكولاتة"],["فلات وايت","☕",65,"قهوة وحليب متوازن"],["ماكياتو","☕",55,"إسبريسو بلمسة حليب"],["قهوة تركي","🫖",35,"قهوة تركي على أصولها"],["قهوة فرنساوي","☕",40,"قهوة فرنساوي بالحليب"],["هوت شوكليت","🍫",60,"شوكولاتة ساخنة كريمية"]
+ ]},
+ {key:"cold",title:"القهوة الباردة",icon:"🧊",desc:"انتعاش وقهوة على البارد",items:[
+  ["آيس لاتيه","🧋",70,"لاتيه بارد ومنعش"],["آيس أمريكانو","🧊",55,"إسبريسو ومياه باردة"],["آيس موكا","🍫",75,"قهوة وشوكولاتة على البارد"],["فرابتشينو","🥤",85,"قهوة مخفوقة بالثلج"],["آيس كراميل لاتيه","🍮",80,"لاتيه بكراميل"],["آيس فانيليا لاتيه","🧋",75,"لاتيه بنكهة الفانيليا"],["كولد برو","🧊",80,"قهوة مستخلصة على البارد"],["آيس وايت موكا","🤍",80,"قهوة بالشوكولاتة البيضاء"],["آيس سبانيش لاتيه","🥛",85,"لاتيه بالحليب المكثف"],["آيس شوكليت","🍫",70,"شوكولاتة باردة"]
+ ]},
+ {key:"juice",title:"العصائر الفريش",icon:"🍓",desc:"فاكهة طازة وانتعاش",items:[
+  ["عصير مانجو","🥭",55,"مانجو طازة"],["عصير فراولة","🍓",50,"فراولة منعشة"],["عصير برتقال","🍊",45,"برتقال فريش"],["عصير جوافة","🍈",45,"جوافة كريمية"],["عصير ليمون نعناع","🍋",45,"ليمون بالنعناع"],["عصير بطيخ","🍉",45,"بطيخ منعش"],["عصير كيوي","🥝",60,"كيوي طازة"],["عصير رمان","❤️",65,"رمان طبيعي"],["كوكتيل فواكه","🍹",70,"مزيج فواكه"],["مانجو بالحليب","🥭",65,"مانجو بالحليب"]
+ ]},
+ {key:"soft",title:"المشروبات الغازية",icon:"🥤",desc:"مشروبات باردة لكل وقت",items:[
+  ["كولا","🥤",30,"مشروب غازي بارد"],["كولا زيرو","🥤",30,"بدون سكر"],["سبرايت","🥤",30,"ليمون منعش"],["فانتا","🍊",30,"نكهة البرتقال"],["مياه معدنية","💧",15,"مياه باردة"],["صودا","🫧",25,"مياه فوارة"],["ريد بول","⚡",65,"مشروب طاقة"],["تونيك","🥤",35,"مياه تونيك"],["آيس تي خوخ","🍑",45,"شاي مثلج بالخوخ"],["آيس تي ليمون","🍋",45,"شاي مثلج بالليمون"]
+ ]}
+];
+let cart={};
+function renderMenu(filter="all"){
+ const root=document.getElementById("menuSections");root.innerHTML="";
+ groups.filter(g=>filter==="all"||g.key===filter).forEach(g=>{
+  const section=document.createElement("div");section.className="menu-section";
+  section.innerHTML=`<div class="menu-title"><span class="icon">${g.icon}</span><h3>${g.title}</h3><small>${g.desc}</small></div><div class="products"></div>`;
+  const grid=section.querySelector(".products");
+  g.items.forEach((item,i)=>{
+   const id=g.key+"-"+i;
+   const card=document.createElement("article");card.className="product";
+   card.innerHTML=`${i===0?'<span class="badge">الأكثر طلبًا</span>':""}<div class="product-art">${item[1]}</div><div class="product-info"><h4>${item[0]}</h4><p>${item[3]}</p><div class="product-bottom"><span class="price">${item[2]} جنيه</span><button class="add" aria-label="أضف ${item[0]}" onclick="addToCart('${id}')">+</button></div></div>`;
+   grid.appendChild(card);
+  });
+  root.appendChild(section);
+ });
+}
+function getProduct(id){for(const g of groups){const i=Number(id.split("-")[1]);if(id.startsWith(g.key+"-"))return {...{name:g.items[i][0],price:g.items[i][2]},id};}return null}
+function addToCart(id){const p=getProduct(id);if(!p)return;if(!cart[id])cart[id]={...p,qty:0};cart[id].qty++;renderCart();showToast("اتضاف "+p.name+" للسلة ☕")}
+function changeQty(id,delta){if(!cart[id])return;cart[id].qty+=delta;if(cart[id].qty<=0)delete cart[id];renderCart()}
+function renderCart(){
+ const items=Object.values(cart),count=items.reduce((s,p)=>s+p.qty,0),sum=items.reduce((s,p)=>s+p.price*p.qty,0);
+ document.getElementById("cartCount").textContent=count;document.getElementById("total").textContent=sum+" جنيه";
+ const box=document.getElementById("cartItems");
+ if(!items.length){box.innerHTML='<p style="color:var(--muted)">السلة لسه فاضية، اختار مشروب من المنيو.</p>';return}
+ box.innerHTML=items.map(p=>`<div class="cart-row"><span>${p.name} — ${p.price} ج</span><span><button onclick="changeQty('${p.id}',-1)">−</button> ${p.qty} <button onclick="changeQty('${p.id}',1)">+</button></span></div>`).join("");
+}
+function toggleCart(){document.getElementById("cartPanel").classList.toggle("open")}
+function showCategory(key,btn){document.querySelectorAll(".cat-btn").forEach(b=>b.classList.remove("active"));btn.classList.add("active");renderMenu(key)}
+let toastTimer;function showToast(msg){const t=document.getElementById("toast");t.textContent=msg;t.classList.add("show");clearTimeout(toastTimer);toastTimer=setTimeout(()=>t.classList.remove("show"),1800)}
+document.getElementById("orderForm").addEventListener("submit",function(e){
+ e.preventDefault();const items=Object.values(cart);if(!items.length){showToast("ضيف منتجات للسلة الأول");return}
+ if(WHATSAPP_NUMBER.includes("X")){alert("قبل الطلب: افتح الكود وغيّر WHATSAPP_NUMBER لرقم واتساب الكافيه.");return}
+ const name=document.getElementById("customerName").value.trim(),phone=document.getElementById("customerPhone").value.trim(),address=document.getElementById("customerAddress").value.trim(),notes=document.getElementById("customerNotes").value.trim();
+ const total=items.reduce((s,p)=>s+p.price*p.qty,0);
+ let msg=`☕ *طلب جديد من بنّ ومزاج*%0A%0A👤 الاسم: ${name}%0A📱 رقم العميل: ${phone}%0A📍 العنوان: ${address}%0A%0A🧾 *الطلبات:*%0A`;
+ items.forEach(p=>msg+=`• ${p.name} × ${p.qty} = ${p.price*p.qty} جنيه%0A`);
+ msg+=`%0A💰 *الإجمالي: ${total} جنيه*`;if(notes)msg+=`%0A📝 ملاحظات: ${notes}`;
+ window.open(`https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent(msg.replaceAll("%0A","\n"))}`,"_blank");
+});
+document.getElementById("year").textContent=new Date().getFullYear();
+renderMenu();renderCart();
+</script>
+</body>
+</html>
